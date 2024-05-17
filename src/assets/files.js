@@ -9,7 +9,7 @@ export const files = {
   const port = 3111;
   
   app.get('/', (req, res) => {
-    res.send('Welcome to a WebContainers app! 🥳');
+    res.send('<div style="color:white;">Welcome to a WebContainers app! 🥳</div>');
   });
   
   app.listen(port, () => {
