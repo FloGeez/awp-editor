@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .code-radio {
+    @apply cursor-pointer rounded-tl lg:rounded-tr py-1 px-4 data-[checked]:text-sky-300 data-[checked]:border-t data-[checked]:border-b data-[checked]:border-t-transparent data-[checked]:border-b-sky-300 bg-slate-700/50 border border-slate-500/30 dark:bg-slate-800/50 focus:outline-none data-[hover]:bg-white/10 data-[focus]:outline-1 data-[focus]:outline-white;
+  }
+}

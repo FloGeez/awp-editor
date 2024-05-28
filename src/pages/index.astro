@@ -1,5 +1,8 @@
 ---
-
+import "../assets/styles.css";
+import CodeEditor from "../components/CodeEditor";
+import TabsEditor from "../components/TabsEditor";
+import App from "../components/App";
 ---
 
 <html lang="en">
@@ -23,7 +26,8 @@
             class="editor-container relative bg-slate-800 shadow-xl p-2 overflow-hidden sm:rounded-xl dark:bg-slate-900/70 dark:backdrop-blur dark:ring-1 dark:ring-inset dark:ring-white/10 min-h-96"
           >
             <div class="editor">
-              <textarea>I am a textarea</textarea>
+              <CodeEditor client:only="react" />
+              <!-- <TabsEditor client:only="react" /> -->
             </div>
             <div class="preview">
               <iframe src="src/components/Preview.astro"></iframe>
