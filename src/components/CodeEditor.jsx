@@ -11,6 +11,13 @@ function CodeEditor() {
 
   const fileContents = files[selectedFileName].file.contents;
 
+  function handleEditorWillMount(monaco) {
+    import("monaco-themes/themes/Blackboard.json").then((data) => {
+      monaco.editor.defineTheme("Blackboard", data);
+      monaco.editor.setTheme("Blackboard");
+    });
+  }
+
   useEffect(() => {
     editorRef.current?.focus();
   }, [selectedFileName]);
@@ -36,6 +43,7 @@ function CodeEditor() {
         theme="vs-dark"
         path={selectedFileName}
         defaultValue={fileContents}
+        beforeMount={handleEditorWillMount}
         onMount={(editor) => (editorRef.current = editor)}
       />
     </>
