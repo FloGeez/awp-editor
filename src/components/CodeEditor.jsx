@@ -1,22 +1,29 @@
 import { useState, useEffect, useRef } from "react";
-import { Field, Label, Radio, RadioGroup } from "@headlessui/react";
+import { Field, Radio, RadioGroup } from "@headlessui/react";
 import Editor from "@monaco-editor/react";
-import files from "../assets/files";
+import { useStore } from "@nanostores/react";
+import { $files, updateFile } from "../stores/files";
 
 function CodeEditor() {
   const editorRef = useRef(null);
+
+  const files = useStore($files);
 
   const fileNames = Object.keys(files);
   const [selectedFileName, setSelectedFileName] = useState(fileNames[0]);
 
   const fileContents = files[selectedFileName].file.contents;
 
-  function handleEditorWillMount(monaco) {
+  const handleEditorWillMount = (monaco) => {
     import("monaco-themes/themes/Blackboard.json").then((data) => {
       monaco.editor.defineTheme("Blackboard", data);
       monaco.editor.setTheme("Blackboard");
     });
-  }
+  };
+  const handleEditorChange = async (value) => {
+    // console.log("🚀 ~ handleEditorChange ~ value:", value);
+    updateFile(selectedFileName, value);
+  };
 
   useEffect(() => {
     editorRef.current?.focus();
@@ -39,11 +46,12 @@ function CodeEditor() {
         ))}
       </RadioGroup>
       <Editor
-        height="80vh"
+        height="600px"
         theme="vs-dark"
         path={selectedFileName}
         defaultValue={fileContents}
         beforeMount={handleEditorWillMount}
+        onChange={handleEditorChange}
         onMount={(editor) => (editorRef.current = editor)}
       />
     </>
